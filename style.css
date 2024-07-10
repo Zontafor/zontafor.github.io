@@ -34,18 +34,12 @@ nav ul li a:hover {
 
 main {
     display: flex;
-    padding: 1rem;
+    justify-content: center;
+    padding: 2rem;
 }
 
 .content {
-    flex: 2;
-    margin-right: 1rem;
-}
-
-.sidebar {
-    flex: 1;
-    background-color: #f4f4f4;
-    padding: 1rem;
+    text-align: center;
 }
 
 footer {
