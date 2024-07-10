@@ -56,9 +56,10 @@ body {
 main {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: calc(100vh - 100px); /* Full height minus footer */
+    align-items: flex-start; /* Align items at the top */
+    height: 100vh; /* Full height of the viewport */
     padding: 2rem;
+    padding-top: 60px; /* Add padding to account for the menu toggle */
 }
 
 .content {
