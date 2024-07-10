@@ -35,7 +35,7 @@ body {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background-color: rgba(51, 51, 51, 0.8); /* Semi-transparent background for the list */
+    background-color: transparent; /* Fully transparent background */
 }
 
 #sidebar ul li {
