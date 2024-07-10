@@ -10,11 +10,10 @@ header {
     position: relative;
     width: 100%;
     height: 60px;
-    background-color: #333;
-    color: white;
     display: flex;
     align-items: center;
     padding: 0 1rem;
+    background: transparent; /* Remove header background color */
 }
 
 .menu-toggle {
@@ -29,7 +28,7 @@ header {
     top: 0;
     width: 250px;
     height: 100%;
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.8); /* Transparent sidebar background */
     transition: left 0.3s;
     padding-top: 60px;
     z-index: 1000;
@@ -62,7 +61,7 @@ header {
 main {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align main content to the top */
     height: calc(100vh - 100px); /* Full height minus header and footer */
     padding: 2rem;
 }
