@@ -20,6 +20,7 @@ header {
 .menu-toggle {
     cursor: pointer;
     font-size: 24px;
+    margin-left: 10px;
 }
 
 #sidebar {
