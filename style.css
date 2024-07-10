@@ -10,10 +10,11 @@ header {
     position: relative;
     width: 100%;
     height: 60px;
+    background-color: #333;
+    color: white;
     display: flex;
     align-items: center;
     padding: 0 1rem;
-    background: none; /* Remove header color */
 }
 
 .menu-toggle {
@@ -61,10 +62,9 @@ header {
 main {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align top */
+    align-items: center;
     height: calc(100vh - 100px); /* Full height minus header and footer */
     padding: 2rem;
-    padding-top: 80px; /* Ensure content starts below header */
 }
 
 .content {
