@@ -56,14 +56,15 @@ body {
 main {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align items at the top */
-    height: 100vh; /* Full height of the viewport */
-    padding: 2rem;
-    padding-top: 60px; /* Add padding to account for the menu toggle */
+    align-items: flex-start; /* Align content to the top */
+    height: calc(100vh - 60px); /* Full height minus footer */
+    padding: 0; /* Remove padding */
+    margin-top: 60px; /* Align with the top of the page */
 }
 
 .content {
     text-align: center;
+    margin-top: 20px; /* Add some space from the top */
 }
 
 footer {
