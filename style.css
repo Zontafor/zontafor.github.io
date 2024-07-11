@@ -8,16 +8,27 @@ body {
     min-height: 100vh; /* Ensure body takes full viewport height */
     display: flex;
     flex-direction: column;
-    background: black; /* Fallback background color */
+    background: #000;
+    color: white;
+    position: relative;
+    overflow: hidden;
 }
 
-canvas#bg {
-    position: fixed;
+@keyframes flow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.animated-background {
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 200%;
     height: 100%;
-    z-index: -1; /* Ensure the canvas is behind other content */
+    background: linear-gradient(270deg, rgba(20,20,20,0.3), rgba(40,40,40,0.7), rgba(20,20,20,0.3));
+    background-size: 50% 100%;
+    animation: flow 10s linear infinite;
+    z-index: -1;
 }
 
 .menu-toggle {
@@ -35,7 +46,7 @@ canvas#bg {
     top: 0;
     width: 250px;
     height: 100%;
-    background-color: transparent; /* Fully transparent background */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
     transition: left 0.3s;
     padding-top: 60px;
     z-index: 1000;
