@@ -4,6 +4,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     overflow-x: hidden; /* Prevent horizontal scroll when sidebar is open */
+    scroll-behavior: smooth; /* Enable smooth scrolling */
 }
 
 .menu-toggle {
