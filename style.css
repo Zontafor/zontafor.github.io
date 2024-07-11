@@ -8,15 +8,29 @@ body {
     min-height: 100vh; /* Ensure body takes full viewport height */
     display: flex;
     flex-direction: column;
-    background: linear-gradient(270deg, #fca2d3, #f8b3c2, #d3bafc, #97a8f1);
-    background-size: 800% 800%;
-    animation: gradient 12s ease infinite;
+    background: black;
 }
 
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://example.com/black-silk-texture.jpg') repeat; /* Replace with actual URL to your silk texture image */
+    background-size: cover;
+    z-index: -1; /* Ensure it's behind all content */
+    animation: flow 20s linear infinite;
+}
+
+@keyframes flow {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
 }
 
 .menu-toggle {
@@ -25,7 +39,7 @@ body {
     left: 10px;
     cursor: pointer;
     font-size: 24px;
-    color: #333;
+    color: #fff; /* Changed to white for better visibility */
 }
 
 #sidebar {
@@ -53,7 +67,7 @@ body {
 }
 
 #sidebar ul li a {
-    color: black; /* Black text color */
+    color: white; /* White text color for better visibility */
     text-decoration: none;
     display: block;
 }
@@ -80,6 +94,7 @@ main {
     padding: 2rem;
     margin-top: 10px; /* Space between the image and the main content */
     flex: 1;
+    color: white; /* White text color for better visibility */
 }
 
 .content {
@@ -91,6 +106,7 @@ main {
 section {
     padding: 2rem;
     margin: 2rem 0;
+    color: white; /* White text color for better visibility */
 }
 
 .achievement-list {
