@@ -11,13 +11,10 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
+    cursor: pointer;
     font-size: 24px;
     color: #333;
-}
-
-.menu-toggle a {
     text-decoration: none;
-    color: #333;
 }
 
 #sidebar {
@@ -26,7 +23,7 @@ body {
     top: 0;
     width: 250px;
     height: 100%;
-    background-color: transparent; /* Fully transparent background */
+    background-color: #f4f4f4;
     padding-top: 60px;
     z-index: 1000;
 }
@@ -35,23 +32,22 @@ body {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background-color: transparent; /* Fully transparent background */
 }
 
 #sidebar ul li {
     padding: 10px 15px;
-    background-color: transparent; /* Fully transparent background */
 }
 
 #sidebar ul li a {
     color: black; /* Black text color */
     text-decoration: none;
     display: block;
-    transition: font-size 0.3s ease;
+    font-size: 18px;
+    transition: font-size 0.3s;
 }
 
 #sidebar ul li a:hover {
-    font-size: 1.2em; /* Enlarge the text on hover */
+    font-size: 24px; /* Enlarge font size on hover */
 }
 
 .banner-image {
@@ -62,12 +58,11 @@ body {
 }
 
 main {
-    margin-left: 260px; /* Adjust for sidebar width */
     display: flex;
     flex-direction: column;
     align-items: center; /* Center align items horizontally */
     padding: 2rem;
-    margin-top: 10px; /* Space between the image and the main content */
+    margin-left: 250px; /* Offset main content to account for the sidebar */
 }
 
 .content {

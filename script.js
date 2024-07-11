@@ -1,6 +1,7 @@
 document.getElementById("menu-toggle").addEventListener("click", function() {
-    var sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("active");
+    // var sidebar = document.getElementById("sidebar");
+    // sidebar.classList.toggle("active");
+    window.location.href = "index.html";
 });
 
 // No need to close sidebar on mouse leave since it is now fixed
