@@ -14,44 +14,40 @@ body {
     cursor: pointer;
     font-size: 24px;
     color: #333;
+    text-decoration: none; /* Remove underline from the link */
 }
 
 #sidebar {
     position: fixed;
-    left: -250px;
+    left: 0;
     top: 0;
-    width: 250px;
+    width: 200px;
     height: 100%;
-    background-color: transparent; /* Fully transparent background */
-    transition: left 0.3s;
+    background-color: #f4f4f4;
     padding-top: 60px;
     z-index: 1000;
+    border-right: 1px solid #ccc;
 }
 
 #sidebar ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background-color: transparent; /* Fully transparent background */
 }
 
 #sidebar ul li {
     padding: 10px 15px;
-    background-color: transparent; /* Fully transparent background */
 }
 
 #sidebar ul li a {
     color: black; /* Black text color */
     text-decoration: none;
     display: block;
+    transition: font-size 0.3s; /* Smooth transition for font size */
 }
 
 #sidebar ul li a:hover {
-    text-decoration: underline;
-}
-
-#sidebar.active {
-    left: 0;
+    font-size: 1.2em; /* Enlarge font size on hover */
 }
 
 .banner-image {
@@ -62,6 +58,7 @@ body {
 }
 
 main {
+    margin-left: 200px; /* Adjust for sidebar width */
     display: flex;
     flex-direction: column;
     align-items: center; /* Center align items horizontally */
