@@ -77,7 +77,14 @@ footer {
     color: white;
     text-align: center;
     padding: 1rem;
+    width: 50%; /* Cut footer length in half */
     position: fixed;
     bottom: 0;
-    width: 100%;
+    left: 25%; /* Center the footer horizontally */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+footer.visible {
+    opacity: 1;
 }

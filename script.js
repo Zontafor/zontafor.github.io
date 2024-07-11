@@ -10,3 +10,13 @@ document.getElementById("sidebar").addEventListener("mouseleave", function() {
         sidebar.classList.remove("active");
     }
 });
+
+// Show footer when scrolled to the bottom
+window.addEventListener("scroll", function() {
+    var footer = document.querySelector("footer");
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        footer.classList.add("visible");
+    } else {
+        footer.classList.remove("visible");
+    }
+});
