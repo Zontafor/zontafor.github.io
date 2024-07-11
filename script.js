@@ -1,17 +1,15 @@
 document.getElementById("menu-toggle").addEventListener("click", function() {
-    // var sidebar = document.getElementById("sidebar");
-    // sidebar.classList.toggle("active");
-    window.location.href = "index.html";
+    var sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("active");
 });
 
-// No need to close sidebar on mouse leave since it is now fixed
-// You can remove the below code if it is not needed
-// document.getElementById("sidebar").addEventListener("mouseleave", function() {
-//     var sidebar = document.getElementById("sidebar");
-//     if (sidebar.classList.contains("active")) {
-//         sidebar.classList.remove("active");
-//     }
-// });
+// Close sidebar when mouse leaves it
+document.getElementById("sidebar").addEventListener("mouseleave", function() {
+    var sidebar = document.getElementById("sidebar");
+    if (sidebar.classList.contains("active")) {
+        sidebar.classList.remove("active");
+    }
+});
 
 // Show footer when scrolled to the bottom
 window.addEventListener("scroll", function() {
