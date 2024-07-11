@@ -5,6 +5,9 @@ body {
     box-sizing: border-box;
     overflow-x: hidden; /* Prevent horizontal scroll when sidebar is open */
     scroll-behavior: smooth; /* Enable smooth scrolling */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    display: flex;
+    flex-direction: column;
 }
 
 .menu-toggle {
@@ -67,6 +70,7 @@ main {
     align-items: center; /* Center align items horizontally */
     padding: 2rem;
     margin-top: 10px; /* Space between the image and the main content */
+    flex: 1;
 }
 
 .content {
@@ -84,10 +88,10 @@ section {
 
 footer {
     background-color: transparent; /* Fully transparent background */
-    color: black; /* Text color */
+    color: white;
     text-align: center;
     padding: 1rem;
     width: 100%; /* Full width */
-    border-top: 1px solid black; /* Line above the footer */
+    border-top: 1px solid white; /* Line above the footer */
     position: static; /* Static position */
 }
