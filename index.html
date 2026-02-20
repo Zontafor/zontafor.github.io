@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Michelle L. Wu | v0.0.0.0.0.1</title>
+    <meta name="description" content="Release v0.0.0.0.0.1 for Michelle L. Wu personal site." />
+    <meta http-equiv="refresh" content="0; url=https://zontafor-personal-site.vercel.app/" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #061126;
+        --panel: rgba(7, 23, 46, 0.84);
+        --line: rgba(166, 205, 255, 0.24);
+        --text: #e8f0ff;
+        --muted: #9db0cf;
+        --accent: #56b4e9;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 12% 20%, rgba(86, 180, 233, 0.2), transparent 42%),
+          radial-gradient(circle at 88% 12%, rgba(0, 114, 178, 0.2), transparent 45%),
+          var(--bg);
+        color: var(--text);
+        font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main {
+        width: min(680px, 92vw);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--panel);
+        padding: 28px;
+        backdrop-filter: blur(8px);
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        letter-spacing: 0.02em;
+      }
+      p {
+        margin: 12px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      a {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .row {
+        margin-top: 18px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Michelle L. Wu | Release v0.0.0.0.0.1</h1>
+      <p>
+        This release endpoint redirects to the production site hosted on Vercel. If redirect does not start,
+        continue via <a href="https://zontafor-personal-site.vercel.app/">https://zontafor-personal-site.vercel.app/</a>.
+      </p>
+      <div class="row">
+        <span class="pill">Status: Live</span>
+        <span class="pill">Channel: Production</span>
+      </div>
+      <p>
+        Alternate alias:
+        <a href="https://michelle-l-wu-site.vercel.app/">https://michelle-l-wu-site.vercel.app/</a>
+      </p>
+    </main>
+  </body>
+</html>
