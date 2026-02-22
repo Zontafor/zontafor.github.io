@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Zontafor | Site Moved</title>
-    <meta name="description" content="The canonical Zontafor site has moved to zontafor.io." />
-    <meta http-equiv="refresh" content="5; url=https://zontafor.io/" />
+    <meta name="description" content="The canonical Zontafor site has moved to zontafor.io. Sentience Labs Pacman is available below." />
     <link rel="canonical" href="https://zontafor.io/" />
     <style>
       :root {
@@ -16,8 +15,11 @@
         --text: #e8f0ff;
         --muted: #a8bbd9;
         --accent: #56b4e9;
+        --gold: #ffd43b;
       }
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
         min-height: 100vh;
@@ -53,23 +55,79 @@
         font-weight: 700;
         text-decoration: none;
       }
-      a:hover { text-decoration: underline; }
-      .frame {
+      a:hover {
+        text-decoration: underline;
+      }
+      .cta {
         margin-top: 16px;
-        width: 100%;
-        height: min(70vh, 620px);
+      }
+      .cta a {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 14px;
+        background: rgba(6, 19, 40, 0.88);
+      }
+      .frame {
+        margin-top: 18px;
         border: 1px solid var(--line);
         border-radius: 14px;
-        overflow: hidden;
-        background: #000;
+        background: #020814;
+        padding: 14px;
       }
-      iframe {
+      .frame-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .frame-head h2 {
+        margin: 0;
+        font-size: 1rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .stats {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      canvas {
+        margin-top: 12px;
         width: 100%;
-        height: 100%;
-        border: 0;
+        height: auto;
+        max-height: 68vh;
+        border: 1px solid rgba(166, 205, 255, 0.18);
+        border-radius: 10px;
+        background: #010611;
+        image-rendering: pixelated;
+      }
+      .controls {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(54px, 64px));
+        gap: 8px;
+        justify-content: center;
+      }
+      .controls button {
+        height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(8, 30, 60, 0.86);
+        color: var(--text);
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .controls button:active {
+        transform: scale(0.98);
       }
       .hint {
-        font-size: 0.92rem;
+        margin-top: 10px;
+        font-size: 0.9rem;
+      }
+      .hint strong {
+        color: var(--gold);
       }
     </style>
   </head>
@@ -77,18 +135,360 @@
     <main>
       <h1>The site has moved to <a href="https://zontafor.io/">zontafor.io</a>.</h1>
       <p>
-        This zontafor.github.io endpoint now forwards to the canonical domain. Redirection starts automatically in a few seconds.
+        This `zontafor.github.io` endpoint now points visitors to the canonical domain. A Sentience Labs Pacman build is available below.
       </p>
-      <p class="hint">While waiting, Pacman is available below.</p>
-      <div class="frame" aria-label="Pacman embed frame">
-        <iframe
-          src="https://playpager.com/embed/pacman/index.html"
-          title="Pacman"
-          loading="lazy"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
+      <div class="cta">
+        <a href="https://zontafor.io/">Open canonical site: zontafor.io</a>
       </div>
+
+      <section class="frame" aria-label="Sentience Labs Pacman">
+        <div class="frame-head">
+          <h2>Sentience Labs Pacman</h2>
+          <div class="stats" id="stats">Score 0 · Pellets 0 · Lives 3 · Level 1</div>
+        </div>
+        <canvas id="game" width="672" height="384" aria-label="Pacman game canvas"></canvas>
+
+        <div class="controls" aria-label="Touch controls">
+          <span></span>
+          <button data-dir="up" type="button">↑</button>
+          <span></span>
+          <button data-dir="left" type="button">←</button>
+          <button data-dir="down" type="button">↓</button>
+          <button data-dir="right" type="button">→</button>
+        </div>
+        <p class="hint"><strong>Controls:</strong> Arrow keys or WASD. Press <strong>R</strong> to restart.</p>
+      </section>
     </main>
+
+    <script>
+      (function () {
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+        const stats = document.getElementById("stats");
+        const TILE = 32;
+        const MAZE = [
+          "#####################",
+          "#.........#.........#",
+          "#.###.###.#.###.###.#",
+          "#o###.###.#.###.###o#",
+          "#...................#",
+          "#.###.#.#####.#.###.#",
+          "#.....#...#...#.....#",
+          "#####.###.#.###.#####",
+          "#.........#.........#",
+          "#.###.###.#.###.###.#",
+          "#o..#...........#..o#",
+          "#####################"
+        ];
+        const WIDTH = MAZE[0].length;
+        const HEIGHT = MAZE.length;
+
+        const DIRS = {
+          up: { x: 0, y: -1 },
+          down: { x: 0, y: 1 },
+          left: { x: -1, y: 0 },
+          right: { x: 1, y: 0 }
+        };
+
+        function key(x, y) {
+          return x + "," + y;
+        }
+
+        function isWall(x, y) {
+          if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT) return true;
+          return MAZE[y][x] === "#";
+        }
+
+        function canMove(px, py, radius) {
+          const r = radius || 0.34;
+          return !(
+            isWall(Math.floor(px - r), Math.floor(py - r)) ||
+            isWall(Math.floor(px + r), Math.floor(py - r)) ||
+            isWall(Math.floor(px - r), Math.floor(py + r)) ||
+            isWall(Math.floor(px + r), Math.floor(py + r))
+          );
+        }
+
+        function randomChoice(arr) {
+          return arr[Math.floor(Math.random() * arr.length)] || arr[0];
+        }
+
+        function openDirections(x, y) {
+          const out = [];
+          for (const name of ["up", "down", "left", "right"]) {
+            const d = DIRS[name];
+            if (canMove(x + d.x * 0.42, y + d.y * 0.42)) out.push(d);
+          }
+          return out;
+        }
+
+        function sameDir(a, b) {
+          return a && b && a.x === b.x && a.y === b.y;
+        }
+
+        function reverseDir(d) {
+          return { x: -d.x, y: -d.y };
+        }
+
+        function createPellets() {
+          const set = new Set();
+          for (let y = 0; y < HEIGHT; y += 1) {
+            for (let x = 0; x < WIDTH; x += 1) {
+              if (MAZE[y][x] === "." || MAZE[y][x] === "o") set.add(key(x, y));
+            }
+          }
+          return set;
+        }
+
+        function createState() {
+          return {
+            player: {
+              x: 1.5,
+              y: 1.5,
+              dir: { x: 1, y: 0 },
+              next: { x: 1, y: 0 },
+              speed: 4.5
+            },
+            ghosts: [
+              { x: 10.5, y: 5.5, dir: { x: -1, y: 0 }, speed: 3.4, color: "#56b4e9" },
+              { x: 9.5, y: 5.5, dir: { x: 1, y: 0 }, speed: 3.2, color: "#ff6b6b" },
+              { x: 10.5, y: 6.5, dir: { x: 0, y: -1 }, speed: 3.0, color: "#8ce99a" }
+            ],
+            pellets: createPellets(),
+            score: 0,
+            lives: 3,
+            level: 1,
+            elapsed: 0,
+            paused: false,
+            gameOver: false
+          };
+        }
+
+        let state = createState();
+        const pressed = new Set();
+        let prev = performance.now();
+
+        function setDirection(name) {
+          const d = DIRS[name];
+          if (!d) return;
+          state.player.next = { x: d.x, y: d.y };
+        }
+
+        function resetPositions() {
+          state.player.x = 1.5;
+          state.player.y = 1.5;
+          state.player.dir = { x: 1, y: 0 };
+          state.player.next = { x: 1, y: 0 };
+          const ghostSpawns = [
+            [10.5, 5.5],
+            [9.5, 5.5],
+            [10.5, 6.5]
+          ];
+          state.ghosts.forEach((g, i) => {
+            g.x = ghostSpawns[i][0];
+            g.y = ghostSpawns[i][1];
+            g.dir = randomChoice(Object.values(DIRS));
+          });
+        }
+
+        function updateStats() {
+          stats.textContent = "Score " + state.score + " · Pellets " + state.pellets.size + " · Lives " + state.lives + " · Level " + state.level;
+        }
+
+        function consumePellet() {
+          const cx = Math.floor(state.player.x);
+          const cy = Math.floor(state.player.y);
+          const k = key(cx, cy);
+          if (state.pellets.has(k)) {
+            state.pellets.delete(k);
+            state.score += 10;
+          }
+          if (state.pellets.size === 0) {
+            state.level += 1;
+            state.player.speed = Math.min(6.2, state.player.speed + 0.2);
+            state.ghosts.forEach((g) => (g.speed = Math.min(5.4, g.speed + 0.15)));
+            state.pellets = createPellets();
+            resetPositions();
+          }
+        }
+
+        function updatePlayer(dt) {
+          const desired = state.player.next;
+          if (canMove(state.player.x + desired.x * 0.42, state.player.y + desired.y * 0.42)) {
+            state.player.dir = desired;
+          }
+
+          const nx = state.player.x + state.player.dir.x * state.player.speed * dt;
+          const ny = state.player.y + state.player.dir.y * state.player.speed * dt;
+          if (canMove(nx, ny)) {
+            state.player.x = nx;
+            state.player.y = ny;
+          }
+
+          if (state.player.x < 0.5) state.player.x = WIDTH - 1.5;
+          if (state.player.x > WIDTH - 0.5) state.player.x = 1.5;
+
+          consumePellet();
+        }
+
+        function updateGhosts(dt) {
+          for (const g of state.ghosts) {
+            const options = openDirections(g.x, g.y);
+            if (options.length) {
+              const reverse = reverseDir(g.dir);
+              const nonReverse = options.filter((d) => !sameDir(d, reverse));
+              const pool = nonReverse.length ? nonReverse : options;
+              const nearCenter = Math.abs(g.x - Math.round(g.x)) < 0.1 && Math.abs(g.y - Math.round(g.y)) < 0.1;
+              if (nearCenter && Math.random() < 0.18) {
+                g.dir = randomChoice(pool);
+              }
+              if (!canMove(g.x + g.dir.x * 0.42, g.y + g.dir.y * 0.42)) {
+                g.dir = randomChoice(pool);
+              }
+            }
+
+            const nx = g.x + g.dir.x * g.speed * dt;
+            const ny = g.y + g.dir.y * g.speed * dt;
+            if (canMove(nx, ny)) {
+              g.x = nx;
+              g.y = ny;
+            }
+          }
+        }
+
+        function checkCollisions() {
+          for (const g of state.ghosts) {
+            const dx = state.player.x - g.x;
+            const dy = state.player.y - g.y;
+            if (Math.hypot(dx, dy) < 0.52) {
+              state.lives -= 1;
+              if (state.lives <= 0) {
+                state.gameOver = true;
+                state.paused = true;
+              } else {
+                resetPositions();
+              }
+              return;
+            }
+          }
+        }
+
+        function drawMaze() {
+          for (let y = 0; y < HEIGHT; y += 1) {
+            for (let x = 0; x < WIDTH; x += 1) {
+              const tx = x * TILE;
+              const ty = y * TILE;
+              if (MAZE[y][x] === "#") {
+                ctx.fillStyle = "#0b2f63";
+                ctx.fillRect(tx, ty, TILE, TILE);
+                ctx.strokeStyle = "rgba(86,180,233,0.35)";
+                ctx.strokeRect(tx + 1, ty + 1, TILE - 2, TILE - 2);
+              }
+            }
+          }
+
+          ctx.fillStyle = "#ffd43b";
+          for (const p of state.pellets) {
+            const [x, y] = p.split(",").map(Number);
+            ctx.beginPath();
+            ctx.arc(x * TILE + TILE / 2, y * TILE + TILE / 2, 3, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        function drawPlayer() {
+          const px = state.player.x * TILE;
+          const py = state.player.y * TILE;
+          const angle = 0.32 + Math.sin(state.elapsed * 10) * 0.14;
+          const dir = state.player.dir;
+          let heading = 0;
+          if (dir.x < 0) heading = Math.PI;
+          if (dir.y > 0) heading = Math.PI / 2;
+          if (dir.y < 0) heading = -Math.PI / 2;
+
+          ctx.fillStyle = "#ffd43b";
+          ctx.beginPath();
+          ctx.moveTo(px, py);
+          ctx.arc(px, py, TILE * 0.42, heading + angle, heading - angle + Math.PI * 2, false);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        function drawGhosts() {
+          for (const g of state.ghosts) {
+            const gx = g.x * TILE;
+            const gy = g.y * TILE;
+            const r = TILE * 0.36;
+            ctx.fillStyle = g.color;
+            ctx.beginPath();
+            ctx.arc(gx, gy - 2, r, Math.PI, 0);
+            ctx.lineTo(gx + r, gy + r);
+            ctx.lineTo(gx - r, gy + r);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = "#ffffff";
+            ctx.beginPath();
+            ctx.arc(gx - 6, gy - 3, 4, 0, Math.PI * 2);
+            ctx.arc(gx + 6, gy - 3, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#031329";
+            ctx.beginPath();
+            ctx.arc(gx - 6, gy - 2, 1.8, 0, Math.PI * 2);
+            ctx.arc(gx + 6, gy - 2, 1.8, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        function drawOverlay() {
+          if (!state.paused && !state.gameOver) return;
+          ctx.fillStyle = "rgba(1,8,20,0.62)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#e8f0ff";
+          ctx.textAlign = "center";
+          ctx.font = "700 34px Montserrat";
+          ctx.fillText(state.gameOver ? "Game Over" : "Paused", canvas.width / 2, canvas.height / 2 - 8);
+          ctx.font = "600 16px Montserrat";
+          ctx.fillText(state.gameOver ? "Press R to restart" : "Press Space to resume", canvas.width / 2, canvas.height / 2 + 24);
+        }
+
+        function loop(now) {
+          const dt = Math.min((now - prev) / 1000, 0.05);
+          prev = now;
+          state.elapsed += dt;
+
+          if (!state.paused && !state.gameOver) {
+            updatePlayer(dt);
+            updateGhosts(dt);
+            checkCollisions();
+          }
+
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          drawMaze();
+          drawPlayer();
+          drawGhosts();
+          drawOverlay();
+          updateStats();
+          requestAnimationFrame(loop);
+        }
+
+        window.addEventListener("keydown", (event) => {
+          const k = event.key.toLowerCase();
+          if (k === "arrowup" || k === "w") setDirection("up");
+          if (k === "arrowdown" || k === "s") setDirection("down");
+          if (k === "arrowleft" || k === "a") setDirection("left");
+          if (k === "arrowright" || k === "d") setDirection("right");
+          if (k === " ") state.paused = !state.paused;
+          if (k === "r") state = createState();
+        });
+
+        for (const button of document.querySelectorAll("[data-dir]")) {
+          button.addEventListener("click", () => setDirection(button.getAttribute("data-dir")));
+        }
+
+        updateStats();
+        requestAnimationFrame(loop);
+      })();
+    </script>
   </body>
 </html>
