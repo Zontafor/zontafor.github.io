@@ -3,22 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Michelle L. Wu | v0.0.0.0.0.1</title>
-    <meta name="description" content="Release v0.0.0.0.0.1 for Michelle L. Wu personal site." />
-    <meta http-equiv="refresh" content="0; url=https://zontafor-personal-site.vercel.app/" />
+    <title>Zontafor | Site Moved</title>
+    <meta name="description" content="The canonical Zontafor site has moved to zontafor.io." />
+    <meta http-equiv="refresh" content="5; url=https://zontafor.io/" />
+    <link rel="canonical" href="https://zontafor.io/" />
     <style>
       :root {
         color-scheme: dark;
-        --bg: #061126;
-        --panel: rgba(7, 23, 46, 0.84);
+        --bg: #07122a;
+        --panel: rgba(7, 23, 46, 0.92);
         --line: rgba(166, 205, 255, 0.24);
         --text: #e8f0ff;
-        --muted: #9db0cf;
+        --muted: #a8bbd9;
         --accent: #56b4e9;
       }
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
       body {
         margin: 0;
         min-height: 100vh;
@@ -30,18 +29,18 @@
           var(--bg);
         color: var(--text);
         font-family: Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        padding: 22px;
       }
       main {
-        width: min(680px, 92vw);
+        width: min(980px, 96vw);
         border: 1px solid var(--line);
         border-radius: 20px;
         background: var(--panel);
-        padding: 28px;
-        backdrop-filter: blur(8px);
+        padding: 24px;
       }
       h1 {
         margin: 0;
-        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        font-size: clamp(1.35rem, 3.6vw, 2.2rem);
         letter-spacing: 0.02em;
       }
       p {
@@ -51,41 +50,45 @@
       }
       a {
         color: var(--accent);
-        font-weight: 600;
+        font-weight: 700;
         text-decoration: none;
       }
-      a:hover {
-        text-decoration: underline;
-      }
-      .row {
-        margin-top: 18px;
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-      }
-      .pill {
+      a:hover { text-decoration: underline; }
+      .frame {
+        margin-top: 16px;
+        width: 100%;
+        height: min(70vh, 620px);
         border: 1px solid var(--line);
-        border-radius: 999px;
-        padding: 8px 12px;
-        color: var(--text);
+        border-radius: 14px;
+        overflow: hidden;
+        background: #000;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      .hint {
+        font-size: 0.92rem;
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>Michelle L. Wu | Release v0.0.0.0.0.1</h1>
+      <h1>The site has moved to <a href="https://zontafor.io/">zontafor.io</a>.</h1>
       <p>
-        This release endpoint redirects to the production site hosted on Vercel. If redirect does not start,
-        continue via <a href="https://zontafor-personal-site.vercel.app/">https://zontafor-personal-site.vercel.app/</a>.
+        This zontafor.github.io endpoint now forwards to the canonical domain. Redirection starts automatically in a few seconds.
       </p>
-      <div class="row">
-        <span class="pill">Status: Live</span>
-        <span class="pill">Channel: Production</span>
+      <p class="hint">While waiting, Pacman is available below.</p>
+      <div class="frame" aria-label="Pacman embed frame">
+        <iframe
+          src="https://playpager.com/embed/pacman/index.html"
+          title="Pacman"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
       </div>
-      <p>
-        Alternate alias:
-        <a href="https://michelle-l-wu-site.vercel.app/">https://michelle-l-wu-site.vercel.app/</a>
-      </p>
     </main>
   </body>
 </html>
